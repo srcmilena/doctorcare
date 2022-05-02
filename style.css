@@ -1,0 +1,81 @@
+/*Os elementos do CSS (propriedades)/HTML (tags) são caixas e posso ver colocando border: 1px solid;*/
+
+* { /*Seletor universal*/
+    margin: 0; /*Não existe mais espaçamento entre elementos*/
+    box-sizing: border-box; /*Para evitar o problema de padding + margin*/
+    /*box-sizing = tamanho da caixa / border-box = vai contar a partir do tamanho da caixa e não do conteúdo/ faz com que a caixa seja contada a partir da borda*/
+}
+
+:root {
+    font-size: 62.5%; /*Se relaciona com o tamanho da fonte do navegador*/
+    /*62.5% = (10*100)/16 / 1rem = 10px*/
+    --primary-color: hsl(170, 100%, 26%); /*var = variáveis do css / hsl = heal (matiz = cor), saturation (saturação = mais colorida ou menos colorida), luminous (brilho = luz da cor, mais escura ou mais clara; alpha (opacidade)*/
+    /*Hexadecimal = 2 primeiros números são do Red, 2 do Green e os últimos do Blue*/
+    --headline: hsl(210, 11%, 15%);
+    --paragraph: hsl(210, 9%, 31%);
+}
+
+body { /*Serve para tudo o que há dentro de <body>*/
+    font-family: 'DM sans';
+    font-size: 1.6rem;
+
+    text-align: center; /*Alinha o texto*/
+}
+
+header {
+    margin-top: 4.1rem;
+    width: 37.5rem;
+    margin-right: auto; /*auto = preenche os espaços automáticamente*/
+    margin-left: auto;
+}
+
+h4 {
+    font-size: 1.4rem; /*1rem é a referência às configurações do navegador (14/16 = 0.875, onde 16 é o tamanho da fonte do meu navegador)*/
+    /*Densidade de pixels da tela, que varia de acordo com as dispositivos. Os tamanho 14px da minha tela pode ser diferente dos 14px de outra pessoa pois é proporcional. Usar pixels traz um problema de acessibilidade nos navegadores pois é um formato que não obedece às variações do navegador ao solicitarmos o aumento do tamanho da fonte. px é uma unidade fixa e rem é uma unidade relativa, é flexível. Pode mudar a porcentagem*/
+    color: var(--primary-color);
+    margin-bottom: 1.6rem; 
+}
+
+h1 {
+    font-size: 3.4rem;
+    color: var(--secondary-color);
+    line-height: 130%;
+
+    margin-bottom: 2.4rem;
+}
+
+p {
+    font-size: 1.8rem;
+    line-height: 150%;
+    font-weight: 400;
+    color: var(--paragraph);
+
+    /*display: block;*/ /*display = exe com a posição da box, o jeito da apresentação*/
+    /*block = define que a caixa tem toda a largura da página e não importa se vem elemento antes ou depois, ela sempre vai jogar o próximo elemento para baixo, quebra da caixa*/
+
+    margin-bottom: 3.2rem;
+}
+
+button { /*É uma caixa com altura, largura, conteúdo, preenchimentos/espaços internos, limites de bordas, espaços ao redor*/
+    background: var(--primary-color);
+
+    border: none;
+    border-radius: 4rem;
+    margin-bottom: 6rem;
+
+    height: 6.2rem;
+    width: 26.3rem;
+
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    display: flex; /*Mexe com os elementos filhos (de dentro) / transforma em uma caixa block por fora*/
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem; /*gap = espaçamento entre os elementos filhos*/
+
+    margin-right: auto;
+    margin-left: auto;
+}
