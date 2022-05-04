@@ -1,50 +1,76 @@
 /*Os elementos do CSS (propriedades)/HTML (tags) são caixas e posso ver colocando border: 1px solid;*/
 
+/*==== Geral ====*/
+
 * { /*Seletor universal*/
-    margin: 0; /*Não existe mais espaçamento entre elementos*/
+    margin: 0; /*Não existe mais espaçamento entre elementos / usando apenas margin faz com que aplique os valores para left, top, bottom e right*/
     box-sizing: border-box; /*Para evitar o problema de padding + margin*/
     /*box-sizing = tamanho da caixa / border-box = vai contar a partir do tamanho da caixa e não do conteúdo/ faz com que a caixa seja contada a partir da borda*/
 }
 
 :root {
-    font-size: 62.5%; /*Se relaciona com o tamanho da fonte do navegador*/
-    /*62.5% = (10*100)/16 / 1rem = 10px*/
     --primary-color: hsl(170, 100%, 26%); /*var = variáveis do css / hsl = heal (matiz = cor), saturation (saturação = mais colorida ou menos colorida), luminous (brilho = luz da cor, mais escura ou mais clara; alpha (opacidade)*/
     /*Hexadecimal = 2 primeiros números são do Red, 2 do Green e os últimos do Blue*/
     --headline: hsl(210, 11%, 15%);
     --paragraph: hsl(210, 9%, 31%);
+    --brand-beige: hsl(39, 100%, 97%);
+    --brand-light: hsl(148, 23%, 89%);
+
+    font-size: 62.5%; /*Se relaciona com o tamanho da fonte do navegador*/
+    /*62.5% = (10*100)/16 / 1rem = 10px*/
+
+    --nav-height: 7.2rem;
 }
 
-body { /*Serve para tudo o que há dentro de <body>*/
+body { /*Serve para tudo o que há dentro de <body>, ou seja, elementos filhos (nem todos os filhos, a header não entra)*/
     font-family: 'DM sans';
     font-size: 1.6rem;
 
     text-align: center; /*Alinha o texto*/
 }
 
-header {
-    margin-top: 4.1rem;
+/*==== Header ====*/
+
+.wrapper {
     width: 37.5rem;
-    margin-right: auto; /*auto = preenche os espaços automáticamente*/
-    margin-left: auto;
+    margin-inline: auto; /*auto = preenche os espaços automáticamente*/
+    padding-inline: 2.4rem;
 }
 
-h4 {
+header {
+    margin-top: calc(4.1rem + var(--nav-height)); /*propriedade calc vem de cálculo*/
+
+}
+
+header::before { /*antes do conteúdo do header*/
+    content: "";
+    width: 100%; /*view port, vai pegar a largura da janela*/
+    height: calc(108rem + var(--nav-height));
+    background-color: var(--brand-light);
+    display: block;
+
+    position: absolute; /*sobrepôe o conteúdo / libera as posições top e left*/
+    top: 0;
+    left: 0;
+    z-index: -1; /*o z vem do eixo z, se retratando de uma caixa 3d e nesse caso foi para trás no conteúdo*/
+}
+
+header h4 {
     font-size: 1.4rem; /*1rem é a referência às configurações do navegador (14/16 = 0.875, onde 16 é o tamanho da fonte do meu navegador)*/
     /*Densidade de pixels da tela, que varia de acordo com as dispositivos. Os tamanho 14px da minha tela pode ser diferente dos 14px de outra pessoa pois é proporcional. Usar pixels traz um problema de acessibilidade nos navegadores pois é um formato que não obedece às variações do navegador ao solicitarmos o aumento do tamanho da fonte. px é uma unidade fixa e rem é uma unidade relativa, é flexível. Pode mudar a porcentagem*/
     color: var(--primary-color);
     margin-bottom: 1.6rem; 
 }
 
-h1 {
+header h1 {
     font-size: 3.4rem;
-    color: var(--secondary-color);
+    color: var(--headline);
     line-height: 130%;
 
     margin-bottom: 2.4rem;
 }
 
-p {
+header p {
     font-size: 1.8rem;
     line-height: 150%;
     font-weight: 400;
@@ -56,11 +82,12 @@ p {
     margin-bottom: 3.2rem;
 }
 
-button { /*É uma caixa com altura, largura, conteúdo, preenchimentos/espaços internos, limites de bordas, espaços ao redor*/
+header button { /*É uma caixa com altura, largura, conteúdo, preenchimentos/espaços internos, limites de bordas, espaços ao redor*/
     background: var(--primary-color);
 
     border: none;
     border-radius: 4rem;
+    
     margin-bottom: 6rem;
 
     height: 6.2rem;
@@ -78,4 +105,79 @@ button { /*É uma caixa com altura, largura, conteúdo, preenchimentos/espaços 
 
     margin-right: auto;
     margin-left: auto;
+}
+
+header img {
+    width: 26.4rem;
+    display: block;
+    margin-inline: auto; /*realinha a imagem*/
+    object-position: 0 2rem; /*x, y / object = própria imagem, é como se fosse uma casca*/
+}
+
+.stats {
+    width: 32.7rem;
+    
+    padding-block: 4rem; /*Mexe no padding de cima e debaixo*/
+
+    margin-inline: auto; /*Funciona como o margin-right + margin-left*/
+
+    background-color: var(--brand-beige);
+    border: 1px solid var(--brand-light);
+    border-radius: 0.6rem;
+
+    display: flex; /*Caixas uma ao lado da outra*/
+    flex-direction: column; /*Caixas em coluna, embaixo da outra /  flex só tem um eixo*/
+    justify-content: center;
+    gap: 6rem;
+}
+
+.stat h3 {
+    font-size: 4.8rem;
+    color: var(--headline);
+    line-height: 130%;
+
+    margin-bottom:0.4rem;
+}
+
+.stat p { /*especifíco com os p's dentro da div*/
+    margin: 0;
+    color: var(--primary-color);
+
+    font-size: 1.6rem;;
+    line-height: 150%;
+}
+
+/*==== Navigation ====*/
+nav {
+    display: flex;
+
+    height: var(--nav-height);
+
+    /*padding: 1.6rem 2.4rem; /*em cima e embaixo*/
+
+    position: fixed; /*faz a sobreposição de conteúdo*/
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /*calcula o tamanho total do elemento no eixo x*/
+}
+
+nav .wrapper {
+    display: flex;
+    align-items: center; /*sobe e alinha no meio*/
+    justify-content: space-between; /*espaço entre eles e joga para os cantos*/
+}
+
+nav.scroll {
+    background: var(--primary-color);
+    width: 100vw;
+    position: fixed;
+    top: 0;
+}
+
+nav.scroll svg:nth-child(1) path {
+    fill: #fff;
+}
+
+nav.scrol svg:nth-child(2) path {
+    stroke: #fff;
 }
