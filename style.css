@@ -4,6 +4,7 @@
 
 * { /*Seletor universal*/
     margin: 0; /*Não existe mais espaçamento entre elementos / usando apenas margin faz com que aplique os valores para left, top, bottom e right*/
+    padding: 0;
     box-sizing: border-box; /*Para evitar o problema de padding + margin*/
     /*box-sizing = tamanho da caixa / border-box = vai contar a partir do tamanho da caixa e não do conteúdo/ faz com que a caixa seja contada a partir da borda*/
 }
@@ -13,6 +14,7 @@
     /*Hexadecimal = 2 primeiros números são do Red, 2 do Green e os últimos do Blue*/
     --headline: hsl(210, 11%, 15%);
     --paragraph: hsl(210, 9%, 31%);
+
     --brand-beige: hsl(39, 100%, 97%);
     --brand-light: hsl(148, 23%, 89%);
 
@@ -22,14 +24,20 @@
     --nav-height: 7.2rem;
 }
 
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
 body { /*Serve para tudo o que há dentro de <body>, ou seja, elementos filhos (nem todos os filhos, a header não entra)*/
     font-family: 'DM sans';
     font-size: 1.6rem;
 
     text-align: center; /*Alinha o texto*/
-}
 
-/*==== Header ====*/
+    overflow: overlay; /*sobrepõe*/
+}
 
 .wrapper {
     width: 37.5rem;
@@ -37,13 +45,18 @@ body { /*Serve para tudo o que há dentro de <body>, ou seja, elementos filhos (
     padding-inline: 2.4rem;
 }
 
+ul {
+    list-style: none;
+}
+
+/*==== Header ====*/
 header {
     margin-top: calc(4.1rem + var(--nav-height)); /*propriedade calc vem de cálculo*/
 
 }
 
 header::before { /*antes do conteúdo do header*/
-    content: "";
+    content: '';
     width: 100%; /*view port, vai pegar a largura da janela*/
     height: calc(108rem + var(--nav-height));
     background-color: var(--brand-light);
@@ -143,7 +156,7 @@ header img {
     margin: 0;
     color: var(--primary-color);
 
-    font-size: 1.6rem;;
+    font-size: 1.6rem;
     line-height: 150%;
 }
 
@@ -178,6 +191,106 @@ nav.scroll svg:nth-child(1) path {
     fill: #fff;
 }
 
-nav.scrol svg:nth-child(2) path {
+nav.scrol button path {
+    stroke: #fff;
+}
+
+nav button {
+    background: none;
+    border: none;
+    cursor: pointer; /* a mãozinha */
+}
+
+/*==== Menu-expanded ====*/
+body.menu-expanded {
+    overflow: hidden; /* overflow = transbordamento do elemento, tira a barra de*/
+}
+
+body.menu-expanded > :not(nav) { /*(> *) o símbolo ">" significa primeiro nível e "*" significa todos (todos do primeiro nível, vai pegar os filhos) / já o not avisa quem não vai pegar*/
+    display: none;
+}
+
+.menu, /* mesmas propriedades do css para os mesmos seletores */
+.close-menu,
+body.menu-expanded .open-menu {
+    opacity: 0;
+    visibility: hidden;
+}
+
+body.menu-expanded .menu,
+body.menu-expanded .close-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+body.menu-expanded .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--primary-color);
+
+    width: 100vw;
+    height: 100vh;
+
+    padding-top: var(--nav-height);
+}
+
+body.menu-expanded nav {
+    position: relative;
+}
+
+.menu ul:nth-child(1) { /* pega o primeiro elemento filho | n = numero */
+    display: flex; /* elementos dentro da caixa serão flexíveis */
+    flex-direction: column; /* direção como coluna */
+    gap: 4.8rem;
+
+    margin-top: 6rem;
+
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 3.1rem;
+}
+
+.menu ul li a { /* tem que chegar no elemento */
+    color: #fff;
+    text-decoration: none;
+}
+
+.menu .button {
+    background-color: #fff;
+    border-radius: 4rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    color: var(--primary-color);
+
+    display: inline-block; /*inline é padrão e se aplica o inline-block para que propriedades como margem sejam liberadas*/
+    padding: 16px 32px;
+    
+    margin-top: 4.8rem;
+    margin-bottom: 8rem;
+}
+
+.social-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3.2rem;
+}
+
+body.menu-expanded .logo,
+body.menu-expanded button {
+    position: relative;
+    z-index: 100;
+}
+
+body.menu-expanded .logo path { /*dentro do logo só tem um path e por isso não precisa identificar qual estamos pegando */
+    fill: #fff;
+}
+
+body.menu-expanded button path {
     stroke: #fff;
 }
