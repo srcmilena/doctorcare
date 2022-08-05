@@ -1,3 +1,3 @@
 # NLW Return 
 
-Projeto da trilha Origin da Next Level Week da Rocketseat, em que foi feito a criação do site "doctorcare".
+Rocketseat's Next Level Week Origin track project, in which the "doctorcare" website was created.
